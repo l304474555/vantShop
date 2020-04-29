@@ -1,0 +1,34 @@
+/* pages/category/category.wxss */
+page{
+  overflow: hidden;
+}
+.van-tree-select{
+  height: calc(100vh - 54px)!important;
+}
+.van-tree-select__nav{
+  width: 200rpx!important;
+  flex: 0!important;
+}
+.van-sidebar-item__text{
+  font-size: 30rpx!important; 
+}
+
+.skeleton-box{
+  display:flex;position:fixed;top:54px;height:100vh;width:100%;z-index:2;pointer-events: none;
+}
+
+.list-box{
+  width:calc(100vw - 200rpx);position:fixed;right:0;top:54px;
+}
+
+.scroll-view{
+  height:calc(100vh - 54px);
+}
+
+.flex-box{
+  display:flex;flex-wrap: wrap;
+}
+
+.go-box{
+  display:flex;justify-content: space-between;align-items: center;
+}

@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <swiper style="height:100vh;">
+    <swiper-item>
+      <image src="/images/index.png" mode="widthFix" style="width:100%"></image>
+    </swiper-item>
+  </swiper>
+</view>

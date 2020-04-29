@@ -1,0 +1,39 @@
+<!--pages/category/category.wxml-->
+
+<!-- 搜索 -->
+<van-search value="{{ value }}" input-align="center" placeholder="请输入搜索关键词" />
+
+<view class="skeleton-box">
+  <view style="{{ 'background:#fff;width:200rpx;opacity:' + (skeletonLoading.nav ? '1' : '0') }}">
+    <van-skeleton loading row="14" rowHeight="50rpx" >
+    </van-skeleton>
+  </view>
+  <view style="flex:1;background:#fff;" wx:if="{{skeletonLoading.list}}">
+    <van-skeleton  loading row="7" rowHeight="{{['200rpx','50rpx','200rpx','50rpx','200rpx','50rpx','200rpx','50rpx','200rpx']}}">
+    </van-skeleton>
+  </view>
+</view>
+
+<van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" data-index="{{ index }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
+</van-tree-select>
+
+<view class="list-box">
+  <scroll-view  class="scroll-view" scroll-y bindscrolltolower="loadList" scroll-top="{{scrollTop}}">
+    <view class="flex-box">
+      <view style="width:50%;" wx:for="{{ goodsList }}">
+        <view style="padding:20rpx">
+          <image src="https://img.yzcdn.cn/vant/apple-1.jpg" style="width:100%;" mode="widthFix"/>
+          <view>{{ item.name }}</view>
+          <view class="go-box">
+            <font>￥111</font>
+            <icon class="iconfont icon-gouwuche" style="font-size:50rpx"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="text-align:center;margin:20rpx 0">
+      <van-loading size="20px" type="spinner">正在加载</van-loading>
+    </view>
+  </scroll-view>
+</view>

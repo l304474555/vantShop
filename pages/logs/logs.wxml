@@ -1,0 +1,5 @@
+<!--logs.wxml-->
+<view class="container log-list" animation="{{animation}}">
+<icon class="iconfont icon-home"></icon>
+ <view class="iconfont" style="width:50px">123</view>
+</view>

@@ -1,0 +1,6 @@
+/**app.wxss**/
+@import './utils/icon.wxss';
+
+.color{
+  color: #D53136
+}
