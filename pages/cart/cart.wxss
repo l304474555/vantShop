@@ -1,0 +1,21 @@
+/* pages/cart/cart.wxss */
+.van-card{
+  background: #fff!important;
+}
+.del-btn{
+  background: rgb(238,10,36);
+  height: 100%;
+  width: 120rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-order-box{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

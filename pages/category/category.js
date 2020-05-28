@@ -1,56 +1,99 @@
 // pages/category/category.js
+import cart from '../../utils/cart'
 const app = getApp();
 Page({
   data: {
-    mainActiveIndex:0,
-    items:[
-      { text: '所有城市' },
-      { text: '所有城市22222222222' },
-      { text: '所有城市3' },
-      { text: '所有城市4' }
-    ],
-    goodsList:[{name:213},{name:213},{name:213},{name:213},{name:213}],
+    mainActiveIndex:0, //当前菜单下标
+    menulist:[], //菜单
+    goodsList:[], //商品
+    parm:{
+      searchKey: '',
+      pageIndex: 1,
+      pageSize: 10
+    },
 
-    skeletonLoading: {
+    skeletonLoading: { //骨架屏
       nav: true,
       list: true
     },
-    scrollTop: 0
+    scrollTop: 0 //页面滑动高度
   },
   onLoad: function (options) {
-    setTimeout(()=>{
-      this.setData({
-        ['skeletonLoading.nav']: false,
-        ['skeletonLoading.list']: false
-      })
-    },2000)
+    this.GetMenus() //获取菜单
+    console.log(cart)
+  
   },
   onReady: function () {},
   onShow: function () {
-    app.API.GetMenus().then(res=>{
-      
-    })
-
+    
   },
-
-  onClickNav(e){
-    console.log(e)
-    this.data.mainActiveIndex = e.detail.index
-    this.data.goodsList.push({name:e.detail.index})
-    this.setData({
-      goodsList: this.data.goodsList,
-      ['skeletonLoading.list']: true,
-      scrollTop: 0
+  //获取菜单
+  GetMenus(){
+    app.API.GetMenus().then(res=>{
+      if(res.State == 1){
+        this.data.menulist = res.Result && res.Result.data
+        this.rendMenuList()
+        this.getPageHome() //获取商品
+      }
     })
-    setTimeout(()=>{
+  },
+  rendMenuList(){
+    this.data.menulist.forEach(item =>{
+      item.text = item.MenuName
+    })
+    this.setData({
+      ['skeletonLoading.nav']: false,
+      menulist: this.data.menulist
+    })
+  },
+  //获取商品
+  getPageHome(){
+    if(!this.data.menulist.length){ return }
+    let menulist = this.data.menulist, mainActiveIndex = this.data.mainActiveIndex;
+    let arg = menulist[mainActiveIndex] && menulist[mainActiveIndex].Id
+    app.API.GetPageHome({ Id: arg }).then(res=>{
+      console.log(res)
+      let isLoading = false;
+      if(res.State == 1){
+
+        isLoading = (res.Result.length < this.data.parm.pageSize) ? false: true ;
+
+        (this.data.parm.pageIndex == 1) 
+        && (this.data.goodsList = res.Result) 
+        || (this.data.goodsList = [...this.data.goodsList, ...res.Result])
+        
+      }
+      
+      this.setData({
+        goodsList: this.data.goodsList,
+        ['skeletonLoading.list']: false,
+        ['skeletonLoading.loading']:isLoading
+      })
+    }, err=>{
       this.setData({
         ['skeletonLoading.list']: false
       })
-    },1000)
+    })
+  },
+  //点击菜单
+  onClickNav(e){
+    console.log(e)
+    this.data.mainActiveIndex = e.detail.index
+    this.data.activeNavItem = e.detail.item
+    this.setData({
+      ['skeletonLoading.list']: true,
+      scrollTop: 0
+    })
+    this.data.parm.pageIndex = 1
+
+    this.getPageHome()
   },
 
-  loadList(){
-    console.log(123)
+  addCart(e){
+    console.log(e)
+    let item  = e.currentTarget.dataset.item
+    cart.add(item)
+    wx.$toast.success('商品添加成功');
   },
   /**
    * 生命周期函数--监听页面隐藏

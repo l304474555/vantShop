@@ -14,26 +14,29 @@
   </view>
 </view>
 
-<van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" data-index="{{ index }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
+<van-tree-select items="{{ menulist }}" main-active-index="{{ mainActiveIndex }}" data-index="{{ index }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
 </van-tree-select>
 
 <view class="list-box">
   <scroll-view  class="scroll-view" scroll-y bindscrolltolower="loadList" scroll-top="{{scrollTop}}">
     <view class="flex-box">
-      <view style="width:50%;" wx:for="{{ goodsList }}">
+      <view style="width:50%;" wx:for="{{ goodsList }}" wx:key="Id">
         <view style="padding:20rpx">
           <image src="https://img.yzcdn.cn/vant/apple-1.jpg" style="width:100%;" mode="widthFix"/>
-          <view>{{ item.name }}</view>
+          <view>{{ item.Name }}</view>
           <view class="go-box">
-            <font>￥111</font>
-            <icon class="iconfont icon-gouwuche" style="font-size:50rpx"></icon>
+            <font>￥{{ item.Price }}</font>
+            <icon data-item="{{item}}" bindtap="addCart" class="iconfont icon-gouwuche bubble" style="font-size:50rpx"></icon>
           </view>
         </view>
       </view>
     </view>
 
-    <view style="text-align:center;margin:20rpx 0">
-      <van-loading size="20px" type="spinner">正在加载</van-loading>
+    <view style="text-align:center;margin:20rpx 0;color:#e0e0e0">
+      <van-loading wx:if="{{skeletonLoading.loading}}" size="20px" type="spinner">正在加载</van-loading>
+      <!-- <view wx:else>加载完毕</view> -->
     </view>
   </scroll-view>
 </view>
+
+<van-toast id="van-toast"/>

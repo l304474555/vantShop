@@ -45,6 +45,7 @@ component_1.VantComponent({
                 ? this.data.activeId.indexOf(item.id) > -1
                 : this.data.activeId === item.id;
             if (!item.disabled && (!isOverMax || isSelected)) {
+                
                 this.$emit('click-item', item);
             }
         },
@@ -52,8 +53,9 @@ component_1.VantComponent({
         onClickNav: function (event) {
             var index = event.detail;
             var item = this.data.items[index];
+            console.log(item)
             if (!item.disabled) {
-                this.$emit('click-nav', { index: index });
+                this.$emit('click-nav', { index: index, item: item});
             }
         },
         // 更新子项列表

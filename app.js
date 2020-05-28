@@ -1,7 +1,9 @@
 //app.js
 import API from './api/index'
+import vant from './utils/wxVant'
 App({
   onLaunch: function () {
+    let that = this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -11,6 +13,8 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('wx.login')
+        console.log(res)
       }
     })
     // 获取用户信息
@@ -34,7 +38,32 @@ App({
       }
     })
   },
+  ajaxLogin(){
+    let that = this
+    return new Promise(function (resolve, reject) {
+      API.Login({UserName:"Goel",PassWord:123}).then(res=>{
+        //测试登陆数据
+        // let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VyTmFtZSI6IkdvZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiLCJVc2VyUHdkIjoiMTIzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIsIlVzZXJJZCI6Ijk5MmNjZjBhLTcyOWYtNGI3YS1hODkyLTFmY2VhNzgyZDRmYyIsIlRva2VuVGltZSI6IjIwMjAtMDUtMjFUMTE6NTU6NTkuMDE5NjczOCswODowMCJ9.ypmiWhD7qSRhbiPkV9zJMOiBaIPvxTrh04-vKkdV1qY"
+        // that.globalData.token = token
+        // wx.setStorageSync('token', token)
+        // resolve()
+        if(res.State == 1){
+          let token = res.Result
+          wx.setStorageSync('token', token)
+          that.globalData.token = token
+          resolve()
+        } else {
+          reject()
+          wx.showToast({
+            icon: 'none',
+            title: res.Result
+          })
+        }
+      })
+    })
+  },
   globalData: {
+    token: '',
     userInfo: null
   },
   API

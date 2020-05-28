@@ -1,0 +1,28 @@
+<!--pages/cart/cart.wxml-->
+<van-cell title="优惠" value="领券" />
+
+<view style="padding:20rpx;background:rgb(247,247,247);height:calc(100vh - 130rpx);overflow-y:scroll">
+	<view wx:for="{{ cart }}" style="margin-bottom:20rpx">
+
+		<van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="closeSwipe" data-item="{{ item }}"  data-index="{{ index }}">
+
+			<van-card tag="标签" price="{{ item.Price }}" desc="{{ item.Name }}" title="{{ item.Name }}" thumb="{{ item.ImgUrl }}">
+				<view slot="num" style="float:right">
+					<van-stepper value="{{ item._qty }}" bind:change="changeItemQty" data-item="{{ item }}" data-index="{{ index }}" />
+				</view>
+			</van-card>
+
+			<view slot="right" class="del-btn">删除</view>
+		</van-swipe-cell>
+
+	</view>
+
+  <view class="no-order-box" wx:if="{{ !cart.length }}">
+    <view style="width:100%;text-align:center;color:#666">
+      <icon  class="iconfont icon-zanwukoubei" style="font-size:70px"></icon>
+      <view>暂无购物车数据</view>
+    </view>
+  </view>
+</view>
+
+<van-dialog id="van-dialog" />

@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/category/category",
-    "pages/logs/logs"
+    "pages/cart/cart",
+    "pages/logs/logs",
+    "pages/my/my"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,13 +28,13 @@
         "selectedIconPath": "images/nav-list-fill.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/cart/cart",
         "text": "购物车",
         "iconPath": "images/cart.png",
         "selectedIconPath": "images/cart-fill.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/my/my",
         "text": "我的",
         "iconPath": "images/user-center.png",
         "selectedIconPath": "images/user-center-fill.png"
@@ -43,7 +45,8 @@
     "van-button": "@vant/weapp/button/index",
     "van-skeleton": "@vant/weapp/skeleton/index",
     "van-search": "@vant/weapp/search/index",
-    "van-loading": "@vant/weapp/loading/index"
+    "van-loading": "@vant/weapp/loading/index",
+    "van-toast": "@vant/weapp/toast/index"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -7,7 +7,7 @@ page{
 }
 .van-tree-select__nav{
   width: 200rpx!important;
-  flex: 0!important;
+  flex: none!important;
 }
 .van-sidebar-item__text{
   font-size: 30rpx!important; 
@@ -32,3 +32,18 @@ page{
 .go-box{
   display:flex;justify-content: space-between;align-items: center;
 }
+
+.bubble{ 
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.4s ease-in-out;
+ }
+ .bubble:active {
+  scale: 0.5;
+  transform: scale(0);
+  opacity: 1;
+  transition: .5s;
+ }
