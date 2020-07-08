@@ -5,8 +5,8 @@
     "van-swipe-cell": "@vant/weapp/swipe-cell/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-stepper": "@vant/weapp/stepper/index",
-    "cell": "plugin://contactPlugin/cell"
-
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index"
   },
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#ffffff",

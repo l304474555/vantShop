@@ -5,8 +5,10 @@
 	<view wx:for="{{ cart }}" style="margin-bottom:20rpx">
 
 		<van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="closeSwipe" data-item="{{ item }}"  data-index="{{ index }}">
+			<van-card price="{{ item.Price }}" desc="{{ item.Name }}" title="{{ item.Name }}" thumb="{{ item.ImgUrl }}" checkbox checkbox-data="{{item._checked}}" bind:onChange="onChange" data-index="{{ index }}">
+				<view slot="thumb">
+				</view>
 
-			<van-card tag="标签" price="{{ item.Price }}" desc="{{ item.Name }}" title="{{ item.Name }}" thumb="{{ item.ImgUrl }}">
 				<view slot="num" style="float:right">
 					<van-stepper value="{{ item._qty }}" bind:change="changeItemQty" data-item="{{ item }}" data-index="{{ index }}" />
 				</view>
@@ -24,5 +26,15 @@
     </view>
   </view>
 </view>
+
+<van-submit-bar
+  price="{{ totolMoney }}"
+  button-text="提交订单"
+  bind:submit="submit"
+  tip="{{ true }}"
+>
+  <van-checkbox size="2em" value="{{allFlag}}"  checked-color="#D53136" bind:change="allChange">全选</van-checkbox>
+  <!-- <view slot="tip">您的收货地址不支持同城送, <text>修改地址</text></view> -->
+</van-submit-bar>
 
 <van-dialog id="van-dialog" />

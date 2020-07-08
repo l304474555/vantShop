@@ -24,12 +24,8 @@ let cart = {
     })
     return flag
   },
-  changeItemQty(item, qty){
-    this.data.forEach(d=>{
-      if(d.Id == item.Id){
-        d._qty = qty
-      }
-    })
+  saveCart(cart){
+    this.data = cart
     this.debounce(this.setCart, 1000)()
   },
   setCart(){

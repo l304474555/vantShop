@@ -17,6 +17,8 @@ component_1.VantComponent({
         num: String,
         desc: String,
         thumb: String,
+        checkbox: Boolean,
+        checkboxData: Boolean,
         title: String,
         price: {
             type: String,
@@ -46,6 +48,9 @@ component_1.VantComponent({
         },
         onClickThumb: function () {
             this.jumpLink('thumbLink');
+        },
+        onChange(event){
+            this.$emit('onChange');
         }
     }
 });

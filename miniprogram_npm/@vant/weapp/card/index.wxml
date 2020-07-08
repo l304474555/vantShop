@@ -2,8 +2,12 @@
 
 <view class="custom-class van-card">
   <view class="{{ utils.bem('card__header', { center: centered }) }}">
-    <view class="van-card__thumb" bind:tap="onClickThumb">
-      <image
+    <view class="van-card__thumb" bind:tap="onClickThumb" style="{{checkbox? 'width: 112px;display:flex;align-items:center': ''}}">
+      <block wx:if="{{ checkbox }}">
+          <van-icon wx:if="{{ checkboxData }}" name="checked" size="1.8em" bindtap="onChange" color="#D53136"/>
+          <van-icon wx:else name="circle" size="1.8em" bindtap="onChange" color="#e0e0e0"/>
+      </block>
+      <image  style="{{checkbox? 'width: 88px': ''}}"
         wx:if="{{ thumb }}"
         src="{{ thumb }}"
         mode="{{ thumbMode }}"

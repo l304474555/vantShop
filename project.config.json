@@ -69,6 +69,13 @@
 					"id": -1,
 					"name": "购物车",
 					"pathName": "pages/cart/cart",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "创建订单",
+					"pathName": "pages/createOrder/createOrder",
 					"scene": null
 				}
 			]

@@ -4,13 +4,15 @@
     "pages/category/category",
     "pages/cart/cart",
     "pages/logs/logs",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/createOrder/createOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#D53136",
-    "navigationBarTitleText": "Vant",
-    "navigationBarTextStyle": "white"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Vant"
+
   },
   "tabBar": {
     "selectedColor": "#D53136",

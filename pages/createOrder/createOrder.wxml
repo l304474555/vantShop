@@ -1,0 +1,22 @@
+<!--pages/createOrder/createOrder.wxml-->
+<view>
+  <block>
+    <van-icon name="location" />
+    <view>
+      <view>姓名 54151</view>
+      <view>地址：拉开距离看全文</view>
+    </view>
+    <van-icon name="arrow" />
+  </block>
+</view>
+
+
+<van-submit-bar
+  price="{{ 3050 }}"
+  button-text="提交订单"
+  bind:submit="onClickButton"
+  tip="{{ true }}"
+>
+  <van-tag type="primary">标签</van-tag>
+  <view slot="tip">您的收货地址不支持同城送, <text>修改地址</text></view>
+</van-submit-bar>

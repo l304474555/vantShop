@@ -7,6 +7,8 @@ Page({
    */
   data: {
     cart:[],
+    allFlag: false,
+    totolMoney: 0
   },
 
   /**
@@ -31,16 +33,63 @@ Page({
   },
 
   getCard(){
+    cart.data.forEach(c=>{
+      if( c._checked == undefined ){
+        c._checked = false
+      }
+    })
     this.setData({
       cart: cart.data
     })
+    this.changeTotalMoney()
   },
+  onChange(e){
+    let index = e.currentTarget.dataset.index || 0
+    var dataName = 'cart[' + index + ']._checked'
+    this.setData({
+      [dataName]: !this.data.cart[index]._checked
+    })
+    this.changeTotalMoney()
+  },
+  allChange(e){
+    var cart = this.data.cart
+    var allFlag = e.detail
+    cart.forEach(c=>{
+      c._checked = allFlag
+    })
+    this.setData({ cart: cart, allFlag })
+    this.changeTotalMoney()
+  },
+  changeTotalMoney(){
+    var totolMoney = 0
+    this.data.cart.forEach(c=>{
+      c._checked && ( totolMoney += (c.Price*c._qty*100) )
+    })
+    this.setData({ totolMoney })
+
+    cart.saveCart(this.data.cart)
+
+    this.checkAllFlag()
+  },
+  checkAllFlag(){
+    var allFlag = true
+    this.data.cart.forEach(c=>{
+      if(!c._checked){
+        allFlag = false
+      }
+    })
+    this.setData({
+      allFlag
+    })
+  },
+
   changeItemQty(e){
     let index = e.currentTarget.dataset.index || 0
     let item = e.currentTarget.dataset.item
     let qty = e.detail
     this.data.cart[index]._qty = qty
-    cart.changeItemQty(item, qty)
+    
+    this.changeTotalMoney()
   },
   closeSwipe(e){
     const { position, instance } = e.detail;
@@ -63,6 +112,28 @@ Page({
     this.setData({
       cart: this.data.cart
     })
+  },
+
+  submit(){
+    var hasGoods = this.checkHasGoods()
+    hasGoods &&
+    wx.navigateTo({
+      url: '../createOrder/createOrder',
+    }) ||
+    wx.showToast({
+      icon: 'none',
+      title: '请选择商品',
+    })
+  },
+
+  checkHasGoods(){
+    let flag = false
+    this.data.cart.forEach(c=>{
+      if(c._checked){
+        flag = true
+      }
+    })
+    return flag
   },
 
   /**
